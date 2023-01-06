@@ -12,4 +12,8 @@ class DriverAPIService(
     fun getListAllDrivers(): List<Driver> {
         return driverRepository.findAll()
     }
+
+    fun getDriverById(driverId: Long): Driver {
+        return driverRepository.getReferenceById(driverId)
+    }
 }
