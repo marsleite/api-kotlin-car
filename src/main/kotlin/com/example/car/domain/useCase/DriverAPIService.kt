@@ -1,6 +1,7 @@
 package com.example.car.domain.useCase
 
 import com.example.car.app.dto.DriverDTO
+import com.example.car.domain.entity.Driver
 import com.example.car.domain.repository.DriverRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -22,7 +23,7 @@ class DriverAPIService(
         return DriverDTO(driver.name, driver.birthDay)
     }
 
-//    fun createDriver(driver: Driver): Driver {
-//        return driverDTOBuilder.save(driver)
-//    }
+    fun createDriver(driver: Driver): Driver {
+        return driverRepository.save(driver)
+    }
 }
