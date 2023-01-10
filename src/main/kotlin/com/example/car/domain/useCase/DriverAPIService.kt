@@ -52,4 +52,14 @@ class DriverAPIService(
 
         return driverRepository.save(copyDriver)
     }
+
+    fun deleteDriver(driverId: Long): String {
+        val foundDriver = driverRepository.findById(driverId).orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND)
+        }
+
+        driverRepository.delete(foundDriver)
+
+        return "deleted successfully"
+    }
 }

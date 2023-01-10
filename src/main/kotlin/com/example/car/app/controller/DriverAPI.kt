@@ -6,6 +6,7 @@ import com.example.car.domain.useCase.DriverAPIService
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -43,5 +44,10 @@ class DriverAPI(
     private fun patchDriver(@RequestBody driver: Driver, @PathVariable id: Long): ResponseEntity<Driver> {
         val driver = driverAPIService.patchDriver(driver, id)
         return ResponseEntity.status(HttpStatus.CREATED).body(driver)
+    }
+
+    @DeleteMapping("api/v1/driver/delete/{id}")
+    private fun deleteDriver(@PathVariable id: Long): ResponseEntity<String> {
+        return ResponseEntity.status(HttpStatus.OK).body(driverAPIService.deleteDriver(id))
     }
 }
