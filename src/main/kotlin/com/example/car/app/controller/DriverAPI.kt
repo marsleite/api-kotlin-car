@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -28,6 +30,18 @@ class DriverAPI(
     @PostMapping("api/v1/driver/create")
     private fun createDriver(@RequestBody driver: Driver): ResponseEntity<Driver> {
         val driver = driverAPIService.createDriver(driver)
+        return ResponseEntity.status(HttpStatus.CREATED).body(driver)
+    }
+
+    @PutMapping("api/v1/driver/update/{id}")
+    private fun updateDriver(@RequestBody driver: Driver, @PathVariable id: Long): ResponseEntity<Driver> {
+        val driver = driverAPIService.updateDriver(id, driver)
+        return ResponseEntity.status(HttpStatus.CREATED).body(driver)
+    }
+
+    @PatchMapping("api/v1/driver/update/{id}")
+    private fun patchDriver(@RequestBody driver: Driver, @PathVariable id: Long): ResponseEntity<Driver> {
+        val driver = driverAPIService.patchDriver(driver, id)
         return ResponseEntity.status(HttpStatus.CREATED).body(driver)
     }
 }

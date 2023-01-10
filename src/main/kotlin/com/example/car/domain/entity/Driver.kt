@@ -12,7 +12,7 @@ data class Driver(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
-    val name: String,
-    val birthDay: LocalDateTime
+    val name: String?,
+    val birthDay: LocalDateTime?
 ) {
 }

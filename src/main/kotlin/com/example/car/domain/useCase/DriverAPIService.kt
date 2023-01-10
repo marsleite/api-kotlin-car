@@ -26,4 +26,30 @@ class DriverAPIService(
     fun createDriver(driver: Driver): Driver {
         return driverRepository.save(driver)
     }
+
+    fun updateDriver(driverId: Long, driver: Driver): Driver {
+        val foundDriver = driverRepository.findById(driverId).orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND)
+        }
+
+        val copyDriver = foundDriver.copy(
+            name = driver.name,
+            birthDay = driver.birthDay
+        )
+
+        return driverRepository.save(copyDriver)
+    }
+
+    fun patchDriver(driver: Driver, driverId: Long): Driver {
+        val foundDriver = driverRepository.findById(driverId).orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND)
+        }
+
+        val copyDriver = foundDriver.copy(
+            name = driver.name ?: foundDriver.name,
+            birthDay = driver.birthDay ?: foundDriver.birthDay
+        )
+
+        return driverRepository.save(copyDriver)
+    }
 }
